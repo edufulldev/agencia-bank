@@ -1,80 +1,67 @@
-# bank-quarkus
+Bank Quarkus - Sistema de Gestão de Agências Bancárias
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Um projeto completo de simulação de sistema bancário desenvolvido com Quarkus, focado em conceitos modernos do ecossistema Java, arquitetura de microsserviços, persistência, testes automatizados, observabilidade e containerização.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+Este repositório contém a implementação de um sistema para cadastro, alteração, consulta e remoção de agências bancárias (operações CRUD), simulando cenários reais encontrados 
+em empresas do setor financeiro e fintechs.
 
-## Running the application in dev mode
+Além do desenvolvimento das APIs REST, a aplicação consome serviços externos via RestClient, gerencia persistência de dados com Hibernate ORM / Panache,
+implementa métricas de observabilidade exportadas para Prometheus e Grafana, e conta com ambiente isolado via Docker Compose.
 
-You can run your application in dev mode that enables live coding using:
+Tecnologias e Ferramentas Utilizadas
 
-```shell script
-./mvnw quarkus:dev
-```
+Java 21+
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+Quarkus (Framework Java Supersonic Subatomic)
 
-## Packaging and running the application
+Jakarta EE / RESTEasy Reactive (Criação de APIs REST)
 
-The application can be packaged using:
+Quarkus REST Client (Consumo de APIs externas)
 
-```shell script
-./mvnw package
-```
+Hibernate ORM com Panache (Repository Pattern) (Persistência e ORM)
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+PostgreSQL (Banco de dados relacional)
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+JUnit 5 & Mockito (Testes de unidade e mocks)
 
-If you want to build an _über-jar_, execute the following command:
+Micrometer, Prometheus & Grafana (Observabilidade e Métricas)
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+Quarkus Logging (io.quarkus.logging.Log) (Logs da aplicação)
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+Docker & Docker Compose (Containerização e orquestração do ambiente)
 
-## Creating a native executable
+Funcionalidades Principais
 
-You can create a native executable using:
+Gestão de Agências Bancárias (CRUD REST):
 
-```shell script
-./mvnw package -Dnative
-```
+Cadastrar novas agências com validações e dados cadastrais.
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+Listar e buscar agências por ID.
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+Atualizar dados de agências existentes.
 
-You can then execute your native executable with: `./target/bank-quarkus-1.0.0-SNAPSHOT-runner`
+Deletar registros de agências.
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+Consumo de Serviços Externos:
 
-## Related Guides
+Integração com APIs externas utilizando @RegisterRestClient para validação e busca de situações cadastrais.
 
-- REST ([guide](https://quarkus.io/guides/rest)): Build RESTful web services and APIs using Jakarta REST (formerly JAX-RS)
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplified JPA/Hibernate data access layer with active record and repository patterns
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-- Micrometer metrics ([guide](https://quarkus.io/guides/micrometer)): Instrument the runtime and your application with dimensional metrics using Micrometer.
+Persistência com Panache (Padrão Repository):
 
-## Provided Code
+Abstração de operações de banco de dados (insert, select, update, delete).
 
-### Hibernate ORM
+Uso de variáveis de ambiente configuráveis no application.properties.
 
-Create your first JPA entity
+Testes Automatizados:
 
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
+Cobertura de regras de negócio com testes unitários isolados usando JUnit e Mockito.
 
+Observabilidade e Monitoramento:
 
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
+Métricas customizadas e de sistema expostas via Micrometer.
 
+Coleta de dados com Prometheus.
 
-### REST
+Dashboards gráficos interativos no Grafana.
 
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+Logs estruturados para auditoria e acompanhamento em tempo real.
